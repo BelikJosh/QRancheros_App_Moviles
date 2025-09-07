@@ -2,18 +2,19 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Get started
+## Para empezar, despues de realizar un pull, o descargar el proyecto o clonar el proyecto
 
-1. Install dependencies
+1. Instalar dependencias
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Iniciar la app
 
    ```bash
    npx expo start
+   npm run start
    ```
 # Guía de Instalación y Uso - Expo App
 
