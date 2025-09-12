@@ -37,10 +37,17 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
-  const applyTheme = (selectedTheme: Theme) => {
-    const colors = themes[selectedTheme];
-    SystemUI.setBackgroundColorAsync(colors.background);
-  };
+  // contexts/ThemeContext.tsx (agregar esto)
+// ... código existente ...
+
+const applyTheme = (selectedTheme: Theme) => {
+  const colors = themes[selectedTheme];
+  SystemUI.setBackgroundColorAsync(colors.background);
+  // Forzar update de toda la app
+  setTheme(selectedTheme);
+};
+
+// ... resto del código ...
 
   const toggleTheme = async () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';

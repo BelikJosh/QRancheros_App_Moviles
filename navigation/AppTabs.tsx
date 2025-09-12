@@ -1,6 +1,8 @@
 // navigation/AppTabs.tsx
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '../src/contexts/themeContext';
+import { useLanguage } from '../src/contexts/LanguageContext';
 import HomeScreen from '../screens/HomeScreen';
 import ScannerScreen from '../screens/ScannerScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -10,18 +12,21 @@ import MapScreen from '../screens/MapScreen';
 const Tab = createBottomTabNavigator();
 
 export default function AppTabs() {
+  const { themeColors } = useTheme();
+  const { t } = useLanguage();
+
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#E67F33',
-        tabBarInactiveTintColor: '#6E4F32',
+        tabBarActiveTintColor: themeColors.primary,
+        tabBarInactiveTintColor: themeColors.text + '80',
         tabBarStyle: {
-          backgroundColor: '#FFFFFF',
+          backgroundColor: themeColors.card,
           borderTopWidth: 1,
-          borderTopColor: '#D4A574',
+          borderTopColor: themeColors.border,
         },
         headerStyle: {
-          backgroundColor: '#E67F33',
+          backgroundColor: themeColors.primary,
         },
         headerTintColor: '#FFFFFF',
         headerTitleStyle: {
@@ -36,7 +41,7 @@ export default function AppTabs() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
-          title: 'Inicio'
+          title: t('tabHome')
         }}
       />
       <Tab.Screen 
@@ -46,7 +51,7 @@ export default function AppTabs() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="wallet" size={size} color={color} />
           ),
-          title: 'Pagar'
+          title: t('tabPay')
         }}
       />
       <Tab.Screen 
@@ -56,7 +61,7 @@ export default function AppTabs() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="scan" size={size} color={color} />
           ),
-          title: 'Escanear QR'
+          title: t('tabScan')
         }}
       />
       <Tab.Screen 
@@ -66,7 +71,7 @@ export default function AppTabs() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="map" size={size} color={color} />
           ),
-          title: 'Mapa'
+          title: t('tabMap')
         }}
       />
       <Tab.Screen 
@@ -76,7 +81,7 @@ export default function AppTabs() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings" size={size} color={color} />
           ),
-          title: 'Configuración'
+          title: t('tabSettings')
         }}
       />
     </Tab.Navigator>

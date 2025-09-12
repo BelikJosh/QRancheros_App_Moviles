@@ -1,8 +1,9 @@
-// App.tsx - IMPORTACIONES CORRECTAS
+// App.tsx
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { ThemeProvider } from './src/contexts/themeContext'; 
+import { ThemeProvider } from './src/contexts/themeContext';
 import { LanguageProvider } from './src/contexts/LanguageContext';
 import LoginScreen from './screens/LoginScreen';
 import AppTabs from './navigation/AppTabs';

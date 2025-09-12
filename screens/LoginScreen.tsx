@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, Alert } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
+import { useTheme } from '../src/contexts/themeContext';
+import { useLanguage } from '../src/contexts/LanguageContext';
 import { Ionicons } from '@expo/vector-icons';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
@@ -10,25 +12,29 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 const LoginScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { themeColors } = useTheme();
+  const { t } = useLanguage();
+
+  const styles = createStyles(themeColors);
 
   const handleLogin = () => {
-    // Validación básica
     if (!email || !password) {
-      Alert.alert('Error', 'Por favor completa todos los campos');
+      Alert.alert(t('error'), t('completeFields'));
       return;
     }
-
-    // Aquí iría tu lógica de autenticación real
-    // Por ahora navegamos directamente al Scanner
     navigation.replace('MainTabs');
   };
 
   const handleGuestLogin = () => {
-    // Navegar como invitado
     navigation.replace('MainTabs');
   };
 
-  // Funciones de escala responsiva (simplificadas)
+  const handleCreateAccount = () => {
+    // Navegar a pantalla de registro
+    Alert.alert(t('comingSoon'), t('featureComingSoon'));
+  };
+
+  // Funciones de escala responsiva
   const horizontalScale = (size: number) => size;
   const verticalScale = (size: number) => size;
   const moderateScale = (size: number, factor = 0.5) => size + (size - size) * factor;
@@ -46,7 +52,7 @@ const LoginScreen = ({ navigation }: Props) => {
           marginTop: verticalScale(30),
           resizeMode: 'cover',
           borderWidth: 3,
-          borderColor: '#E67F33',
+          borderColor: themeColors.primary,
         }}
       />
 
@@ -56,7 +62,7 @@ const LoginScreen = ({ navigation }: Props) => {
           fontSize: moderateScale(24, 0.3),
           marginBottom: verticalScale(0)
         }]}>
-          Bienvenido a
+          {t('welcome')}
         </Text>
         <Text style={[styles.appName, { 
           fontSize: moderateScale(32, 0.3),
@@ -72,7 +78,7 @@ const LoginScreen = ({ navigation }: Props) => {
           fontSize: moderateScale(16, 0.3),
           marginBottom: verticalScale(8),
         }]}>
-          Email
+          {t('email')}
         </Text>
         <TextInput
           style={[styles.input, {
@@ -81,10 +87,10 @@ const LoginScreen = ({ navigation }: Props) => {
             marginBottom: verticalScale(20),
             fontSize: moderateScale(16, 0.3),
           }]}
-          placeholder="Ingresa tu email"
+          placeholder={t('enterEmail')}
           keyboardType="email-address"
           autoCapitalize="none"
-          placeholderTextColor="#999"
+          placeholderTextColor={themeColors.text + '80'}
           value={email}
           onChangeText={setEmail}
         />
@@ -93,7 +99,7 @@ const LoginScreen = ({ navigation }: Props) => {
           fontSize: moderateScale(16, 0.3),
           marginBottom: verticalScale(8),
         }]}>
-          Contraseña
+          {t('password')}
         </Text>
         <TextInput
           style={[styles.input, {
@@ -102,18 +108,20 @@ const LoginScreen = ({ navigation }: Props) => {
             marginBottom: verticalScale(10),
             fontSize: moderateScale(16, 0.3),
           }]}
-          placeholder="Ingresa tu contraseña"
+          placeholder={t('enterPassword')}
           secureTextEntry
-          placeholderTextColor="#999"
+          placeholderTextColor={themeColors.text + '80'}
           value={password}
           onChangeText={setPassword}
         />
-<TouchableOpacity onPress={handleGuestLogin}>
-          <Text style={[styles.guestText, { 
+
+        {/* Botón de crear cuenta */}
+        <TouchableOpacity onPress={handleCreateAccount}>
+          <Text style={[styles.createAccountText, { 
             fontSize: moderateScale(14, 0.3),
             marginTop: verticalScale(10)
           }]}>
-            Crear Cuenta
+            {t('createAccount')}
           </Text>
         </TouchableOpacity>
 
@@ -123,7 +131,7 @@ const LoginScreen = ({ navigation }: Props) => {
             fontSize: moderateScale(14, 0.3),
             marginTop: verticalScale(10)
           }]}>
-            Iniciar como Invitado
+            {t('guestLogin')}
           </Text>
         </TouchableOpacity>
       </View>
@@ -140,7 +148,7 @@ const LoginScreen = ({ navigation }: Props) => {
         <Text style={[styles.mainButtonText, { 
           fontSize: moderateScale(18, 0.3) 
         }]}>
-          Entrar
+          {t('login')}
         </Text>
       </TouchableOpacity>
 
@@ -155,7 +163,7 @@ const LoginScreen = ({ navigation }: Props) => {
           fontSize: moderateScale(14, 0.3),
           marginHorizontal: horizontalScale(10)
         }]}>
-          o
+          {t('or')}
         </Text>
         <View style={[styles.separatorLine, { 
           height: verticalScale(1) 
@@ -182,7 +190,7 @@ const LoginScreen = ({ navigation }: Props) => {
           fontSize: moderateScale(16, 0.3),
           marginLeft: horizontalScale(10)
         }]}>
-          Sign in with Google
+          {t('signInGoogle')}
         </Text>
       </TouchableOpacity>
 
@@ -192,7 +200,7 @@ const LoginScreen = ({ navigation }: Props) => {
           <Text style={[styles.legalText, { 
             fontSize: moderateScale(12, 0.3) 
           }]}>
-            Términos y condiciones
+            {t('terms')}
           </Text>
         </TouchableOpacity>
         <Text style={[styles.legalSeparator, { 
@@ -205,7 +213,7 @@ const LoginScreen = ({ navigation }: Props) => {
           <Text style={[styles.legalText, { 
             fontSize: moderateScale(12, 0.3) 
           }]}>
-            Avisos de privacidad
+            {t('privacy')}
           </Text>
         </TouchableOpacity>
       </View>
@@ -213,46 +221,51 @@ const LoginScreen = ({ navigation }: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: any) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffffffff',
+    backgroundColor: colors.background,
   },
   header: {
     alignItems: 'center',
   },
   welcomeText: {
-    color: '#6E4F32',
+    color: colors.text,
     fontWeight: '300',
   },
   appName: {
-    color: '#6E4F32',
+    color: colors.text,
     fontWeight: 'bold',
   },
   formContainer: {
     width: '100%',
   },
   label: {
-    color: '#6E4F32',
+    color: colors.text,
     fontWeight: '600',
   },
   input: {
     width: '100%',
-    backgroundColor: '#FFFFFF',
-    color: '#6E4F32',
+    backgroundColor: colors.card,
+    color: colors.text,
     borderWidth: 1,
-    borderColor: '#E67F33',
+    borderColor: colors.primary,
+  },
+  createAccountText: {
+    color: colors.primary,
+    textAlign: 'center',
+    fontWeight: '600',
   },
   guestText: {
-    color: '#E67F33',
+    color: colors.secondary,
     textAlign: 'center',
     fontWeight: '500',
   },
   mainButton: {
     width: '100%',
-    backgroundColor: '#E67F33',
+    backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -267,22 +280,22 @@ const styles = StyleSheet.create({
   },
   separatorLine: {
     flex: 1,
-    backgroundColor: '#D4A574',
+    backgroundColor: colors.border,
   },
   separatorText: {
-    color: '#6E4F32',
+    color: colors.text,
   },
   googleButton: {
     width: '100%',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.card,
     borderWidth: 1,
-    borderColor: '#D4A574',
+    borderColor: colors.border,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   googleButtonText: {
-    color: '#6E4F32',
+    color: colors.text,
     fontWeight: '500',
   },
   legalLinks: {
@@ -291,10 +304,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   legalText: {
-    color: '#6E4F32',
+    color: colors.text + '80',
   },
   legalSeparator: {
-    color: '#6E4F32',
+    color: colors.text + '80',
   },
 });
 
