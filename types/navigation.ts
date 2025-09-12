@@ -10,7 +10,7 @@ export type MainTabParamList = {
   Scan: undefined;
   Map: undefined;
   Profile: undefined;
-  Settings: undefined;
+  Settings: undefined; 
 };
 
 declare global {
