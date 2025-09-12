@@ -15,6 +15,7 @@
     "@react-navigation/native": "^7.1.17",
     "@react-navigation/native-stack": "^7.3.26",
     "async-storage": "^0.1.0",
+    "credit-card-type": "^10.1.0",
     "expo": "~54.0.3",
     "expo-barcode-scanner": "^13.0.1",
     "expo-camera": "~17.0.7",
@@ -26,6 +27,7 @@
     "react-native-screens": "~4.16.0"
   },
   "devDependencies": {
+    "@types/credit-card-type": "^7.0.0",
     "@types/react": "~19.1.0",
     "typescript": "~5.9.2"
   },

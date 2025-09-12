@@ -2,6 +2,7 @@
 export type RootStackParamList = {
   Login: undefined;
   MainTabs: undefined; // ← Nueva pantalla para los tabs
+  Bank_Card: undefined; // ← Agregar esta ruta con el nombre exac
 };
 
 export type MainTabParamList = {
@@ -11,6 +12,7 @@ export type MainTabParamList = {
   Map: undefined;
   Profile: undefined;
   Settings: undefined; 
+  Bank: undefined;
 };
 
 declare global {

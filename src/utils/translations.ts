@@ -50,6 +50,7 @@ export const translations = {
     turnOnCamera: 'Encender Cámara',
     turnOffCamera: 'Apagar Cámara',
     cameraInactive: 'Cámara desactivada',
+    goToBank: 'Ir a Banco',
   },
   en: {
     settings: 'Settings',
@@ -100,6 +101,8 @@ export const translations = {
     turnOnCamera: 'Turn On Camera',
     turnOffCamera: 'Turn Off Camera',
     cameraInactive: 'Camera inactive',
+    goToBank: 'Go to Bank',
+    
   },
 };
 

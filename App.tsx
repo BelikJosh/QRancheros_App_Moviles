@@ -8,6 +8,7 @@ import { LanguageProvider } from './src/contexts/LanguageContext';
 import LoginScreen from './screens/LoginScreen';
 import AppTabs from './navigation/AppTabs';
 import { RootStackParamList } from './types/navigation';
+import Bank_CardScreen from './screens/Bank_CardScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -23,6 +24,7 @@ export default function App() {
           >
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="MainTabs" component={AppTabs} />
+            <Stack.Screen name="Bank_Card" component={Bank_CardScreen}/>
           </Stack.Navigator>
         </NavigationContainer>
       </LanguageProvider>

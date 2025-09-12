@@ -125,7 +125,7 @@ export default function ScannerScreen({ navigation }: Props) {
       <View style={styles.controls}>
         <TouchableOpacity style={styles.controlButton} onPress={toggleCamera}>
           <Ionicons 
-            name={isCameraActive ? 'camera-off' : 'camera'} 
+            name={isCameraActive ? 'videocam-off' : 'camera'} 
             size={24} 
             color={themeColors.primary} 
           />
